@@ -41,6 +41,7 @@ $(document).ready(function() {
 
         // estraggo le informazioni che mi servono dagli oggetti dell'array
         // e le stampo in pagina tramite handlebars
+        // se non ci sono risultati stampo un messaggio in pagina
         if(listaRisultati.length == 0) {
           contRisultati.append("Nessun risultato trovato.");
         } else {
@@ -55,6 +56,12 @@ $(document).ready(function() {
 
             var html = template(context);
             contRisultati.append(html);
+
+            // controllo se il titolo è uguale al titolo originale nascondo
+            // quest'ultimo
+            if(context.titolo == context.titoloOriginale) {
+              $(".movie-card").last().find(".original-title").hide();
+            }
           }
         }
       },
