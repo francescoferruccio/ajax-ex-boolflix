@@ -41,17 +41,21 @@ $(document).ready(function() {
 
         // estraggo le informazioni che mi servono dagli oggetti dell'array
         // e le stampo in pagina tramite handlebars
-        for(var i=0; i < listaRisultati.length; i++) {
-          console.log(listaRisultati[i]);
-          var context = {
-            titolo: listaRisultati[i].title,
-            titoloOriginale: listaRisultati[i].original_title,
-            lingua: listaRisultati[i].original_language.toUpperCase(),
-            voto: listaRisultati[i].vote_average
-          };
+        if(listaRisultati.length == 0) {
+          contRisultati.append("Nessun risultato trovato.");
+        } else {
+          for(var i=0; i < listaRisultati.length; i++) {
+            console.log(listaRisultati[i]);
+            var context = {
+              titolo: listaRisultati[i].title,
+              titoloOriginale: listaRisultati[i].original_title,
+              lingua: listaRisultati[i].original_language.toUpperCase(),
+              voto: listaRisultati[i].vote_average
+            };
 
-          var html = template(context);
-          contRisultati.append(html);
+            var html = template(context);
+            contRisultati.append(html);
+          }
         }
       },
       error: function(richiesta, stato, errore) {
