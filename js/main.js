@@ -22,8 +22,9 @@ $(document).ready(function() {
   searchBtn.click(function() {
     // cancello tutto il contenuto delle precedenti ricerche
     contRisultati.html("");
-    // salvo il valore inserito dall'utente
+    // salvo il valore inserito dall'utente e svuoto l'input
     var queryString = $("#input").val();
+    $("#input").val("");
 
     // effettuo la chiamata ajax passandogli il valore della ricerca dinamicamente
     $.ajax({
@@ -45,7 +46,7 @@ $(document).ready(function() {
           var context = {
             titolo: listaRisultati[i].title,
             titoloOriginale: listaRisultati[i].original_title,
-            lingua: listaRisultati[i].original_language,
+            lingua: listaRisultati[i].original_language.toUpperCase(),
             voto: listaRisultati[i].vote_average
           };
 
