@@ -55,7 +55,7 @@ $(document).ready(function() {
         }
       },
       error: function(richiesta, stato, errore) {
-        console.log("ERRORE!");
+        console.log("ERRORE! Codice: " + richiesta.status);
       }
     });
   });
