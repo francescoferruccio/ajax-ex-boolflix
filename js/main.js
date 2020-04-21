@@ -10,11 +10,22 @@
 // 4. Voto
 
 $(document).ready(function() {
-  var searchBtn = $("#search-btn");
+  // handlebars
+  var source = $("#movie-template").html();
+  var template = Handlebars.compile(source);
 
+  // variabili globali
+  var searchBtn = $("#search-btn");
+  var contRisultati = $(".result-container");
+
+  // al click sul bottone "CERCA"
   searchBtn.click(function() {
+    // cancello tutto il contenuto delle precedenti ricerche
+    contRisultati.html("");
+    // salvo il valore inserito dall'utente
     var queryString = $("#input").val();
 
+    // effettuo la chiamata ajax passandogli il valore della ricerca dinamicamente
     $.ajax({
       url: "https://api.themoviedb.org/3/search/movie",
       method: "GET",
@@ -24,7 +35,23 @@ $(document).ready(function() {
         language: "it-IT"
       },
       success: function(data, stato) {
-        console.log(data);
+        // salvo l'array di oggetti
+        var listaRisultati = data.results;
+
+        // estraggo le informazioni che mi servono dagli oggetti dell'array
+        // e le stampo in pagina tramite handlebars
+        for(var i=0; i < listaRisultati.length; i++) {
+          console.log(listaRisultati[i]);
+          var context = {
+            titolo: listaRisultati[i].title,
+            titoloOriginale: listaRisultati[i].original_title,
+            lingua: listaRisultati[i].original_language,
+            voto: listaRisultati[i].vote_average
+          };
+
+          var html = template(context);
+          contRisultati.append(html);
+        }
       },
       error: function(richiesta, stato, errore) {
         console.log("ERRORE!");

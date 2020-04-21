@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    
+
     <div class="searchbar">
       <input id="input" type="text" name="input" value="">
       <button id="search-btn" type="button" name="button">CERCA</button>
@@ -17,6 +17,19 @@
     </div>
 
 
+    <!-- TEMPLATE -->
+    <script id="movie-template" type="text/x-handlebars-template">
+      <div class="movie-card">
+        <ul>
+          <li>Titolo: {{titolo}}</li>
+          <li>Titolo Originale: {{titoloOriginale}}</li>
+          <li>Lingua: {{lingua}}</li>
+          <li>Voto: {{voto}}</li>
+        </ul>
+      </div>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
   </body>
