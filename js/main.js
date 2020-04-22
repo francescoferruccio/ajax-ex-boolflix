@@ -1,14 +1,3 @@
-// Milestone 1:
-// Creare un layout base con una searchbar (una input e un button) in cui possiamo
-// scrivere completamente o parzialmente il nome di un film. Possiamo, cliccando il
-// bottone, cercare sull’API tutti i film che contengono ciò che ha scritto l’utente.
-// Vogliamo dopo la risposta dell’API visualizzare a schermo i seguenti valori per ogni
-// film trovato:
-// 1. Titolo
-// 2. Titolo Originale
-// 3. Lingua
-// 4. Voto
-
 $(document).ready(function() {
   // handlebars
   var source = $("#movie-template").html();
@@ -26,7 +15,7 @@ $(document).ready(function() {
     var queryString = $("#input").val();
     $("#input").val("");
 
-    // effettuo la chiamata ajax passandogli il valore della ricerca dinamicamente
+    // chiamata ajax per film
     $.ajax({
       url: "https://api.themoviedb.org/3/search/movie",
       method: "GET",
@@ -39,31 +28,27 @@ $(document).ready(function() {
         // salvo l'array di oggetti
         var listaRisultati = data.results;
 
-        // estraggo le informazioni che mi servono dagli oggetti dell'array
-        // e le stampo in pagina tramite handlebars
-        // se non ci sono risultati stampo un messaggio in pagina
-        if(listaRisultati.length == 0) {
-          contRisultati.append("Nessun risultato trovato.");
-        } else {
-          for(var i=0; i < listaRisultati.length; i++) {
-            console.log(listaRisultati[i]);
-            var context = {
-              titolo: listaRisultati[i].title,
-              titoloOriginale: listaRisultati[i].original_title,
-              lingua: listaRisultati[i].original_language.toUpperCase(),
-              voto: listaRisultati[i].vote_average
-            };
+        stampaRisultati(listaRisultati, "Film");
+      },
+      error: function(richiesta, stato, errore) {
+        console.log("ERRORE! Codice: " + richiesta.status);
+      }
+    });
 
-            var html = template(context);
-            contRisultati.append(html);
+    // chiamata ajax per serie tv
+    $.ajax({
+      url: "https://api.themoviedb.org/3/search/tv",
+      method: "GET",
+      data: {
+        api_key: "db123098e9fe123d1b0a79cc401c920d",
+        query: queryString,
+        language: "it-IT"
+      },
+      success: function(data, stato) {
+        // salvo l'array di oggetti
+        var listaRisultati = data.results;
 
-            // controllo se il titolo è uguale al titolo originale nascondo
-            // quest'ultimo
-            if(context.titolo == context.titoloOriginale) {
-              $(".movie-card").last().find(".original-title").hide();
-            }
-          }
-        }
+        stampaRisultati(listaRisultati, "TV");
       },
       error: function(richiesta, stato, errore) {
         console.log("ERRORE! Codice: " + richiesta.status);
@@ -72,6 +57,45 @@ $(document).ready(function() {
   });
 
 
+  // DICHIARAZIONE FUNZIONI ----------------------------------------------------
+
+  // funzione che estre le informazioni che mi servono dagli oggetti dell'array
+  // e le stampa in pagina tramite handlebars
+  // se non ci sono risultati stampa un messaggio in pagina
+  function stampaRisultati(arrayOggetti, tipo) {
+    var title, origTitle;
+
+    if(arrayOggetti.length == 0) {
+      contRisultati.append("Nessun risultato trovato.");
+    } else {
+      for(var i=0; i < arrayOggetti.length; i++) {
+        if (tipo == "Film") {
+          title = arrayOggetti[i].title;
+          origTitle = arrayOggetti[i].original_title;
+        } else {
+          title = arrayOggetti[i].name;
+          origTitle = arrayOggetti[i].original_name;
+        }
+
+        var context = {
+          titolo: title,
+          titoloOriginale: origTitle,
+          lingua: arrayOggetti[i].original_language.toUpperCase(),
+          voto: arrayOggetti[i].vote_average,
+          tipo: tipo
+        };
+
+        var html = template(context);
+        contRisultati.append(html);
+
+        // controllo se il titolo è uguale al titolo originale nascondo
+        // quest'ultimo
+        if(context.titolo == context.titoloOriginale) {
+          $(".movie-card").last().find(".original-title").hide();
+        }
+      }
+    }
+  }
 
 
 
