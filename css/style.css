@@ -14,11 +14,15 @@ ul {
 
 .movie-card {
   margin: 10px;
-  display: flex;
   border-bottom: 1px solid lightgrey;
   padding-bottom: 10px;
 }
 
-.movie-card .info {
-  margin-left: 10px;
+.movie-card .language {
+  display: flex;
+}
+
+.movie-card img {
+  height: 20px;
+  margin: 0 10px;
 }

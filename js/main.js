@@ -6,6 +6,7 @@ $(document).ready(function() {
   // variabili globali
   var searchBtn = $("#search-btn");
   var contRisultati = $(".result-container");
+  var listaBandiere = ["it", "en"];
 
   // al click sul bottone "CERCA"
   searchBtn.click(function() {
@@ -92,12 +93,19 @@ $(document).ready(function() {
           stelline += '<i class="far fa-star"></i>';
         }
 
-        console.log(stelline);
+        // visualizzo una bandierina se è presente altrimenti stampo
+        // il codice della lingua
+        var lingua = arrayOggetti[i].original_language;
+        if(listaBandiere.includes(lingua)) {
+          lingua = '<img src="img/' + lingua + '.svg">';
+        } else  {
+          lingua = lingua.toUpperCase();
+        }
 
         var context = {
           titolo: title,
           titoloOriginale: origTitle,
-          lingua: arrayOggetti[i].original_language.toUpperCase(),
+          lingua: lingua,
           voto: stelline,
           tipo: tipo
         };
