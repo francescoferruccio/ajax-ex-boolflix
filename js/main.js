@@ -67,7 +67,11 @@ $(document).ready(function() {
     var title, origTitle;
 
     if(arrayOggetti.length == 0) {
-      contRisultati.append("Nessun risultato trovato.<br>");
+      if(tipo == "Film") {
+        contRisultati.append("Nessun film trovato.<br>");
+      } else {
+        contRisultati.append("Nessuna serie TV trovata.<br>");
+      }
     } else {
       for(var i=0; i < arrayOggetti.length; i++) {
         if (tipo == "Film") {
