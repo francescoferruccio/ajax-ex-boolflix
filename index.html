@@ -22,11 +22,18 @@
     <script id="movie-template" type="text/x-handlebars-template">
       <div class="movie-card">
         <ul>
-          <li>Titolo: {{titolo}}</li>
-          <li class="original-title">Titolo Originale: {{titoloOriginale}}</li>
-          <li class="language">Lingua Originale: {{{lingua}}}</li>
-          <li>Voto: {{{voto}}}</li>
-          <li>Tipo: {{tipo}}</li>
+          <li>Titolo:</li>
+          <li class="original-title">Titolo Originale:</li>
+          <li class="language">Lingua Originale:</li>
+          <li>Voto:</li>
+          <li>Tipo:</li>
+        </ul>
+        <ul class="info">
+          <li>{{titolo}}</li>
+          <li class="original-title">{{titoloOriginale}}</li>
+          <li class="language">{{{lingua}}}</li>
+          <li>{{{voto}}}</li>
+          <li>{{tipo}}</li>
         </ul>
       </div>
     </script>
