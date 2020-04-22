@@ -66,7 +66,7 @@ $(document).ready(function() {
     var title, origTitle;
 
     if(arrayOggetti.length == 0) {
-      contRisultati.append("Nessun risultato trovato.");
+      contRisultati.append("Nessun risultato trovato.<br>");
     } else {
       for(var i=0; i < arrayOggetti.length; i++) {
         if (tipo == "Film") {
@@ -77,11 +77,28 @@ $(document).ready(function() {
           origTitle = arrayOggetti[i].original_name;
         }
 
+        // trasformo il voto in un numero intero tra 1 e 5
+        var voto = arrayOggetti[i].vote_average;
+        voto = Math.ceil((voto / 2));
+
+        // creo una stringa di stelline dinamicamente in base al voto
+        var stelline = "";
+        // inserisco tante stelline piene quanto il numero del voto
+        for (var j = 0; j < voto; j++) {
+          stelline += '<i class="fas fa-star"></i>';
+        }
+        // inserisco la rimanenza di stelline vuote fino ad averne 5
+        for (var k = voto; k < 5; k++) {
+          stelline += '<i class="far fa-star"></i>';
+        }
+
+        console.log(stelline);
+
         var context = {
           titolo: title,
           titoloOriginale: origTitle,
           lingua: arrayOggetti[i].original_language.toUpperCase(),
-          voto: arrayOggetti[i].vote_average,
+          voto: stelline,
           tipo: tipo
         };
 
