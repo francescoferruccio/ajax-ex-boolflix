@@ -15,15 +15,20 @@ ul {
 .movie-card {
   margin: 10px;
   display: flex;
+  align-items: center;
   border-bottom: 1px solid lightgrey;
   padding-bottom: 10px;
+}
+
+.movie-card .poster {
+  margin-right: 10px;
 }
 
 .movie-card .language {
   display: flex;
 }
 
-.movie-card img {
+.movie-card .flag {
   height: 20px;
 }
 

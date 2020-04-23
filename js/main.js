@@ -82,6 +82,7 @@ $(document).ready(function() {
         }
 
         var context = {
+          poster: generatePoster(arrayOggetti[i].poster_path),
           titolo: title,
           titoloOriginale: origTitle,
           lingua: generateFlag(arrayOggetti[i].original_language),
@@ -120,13 +121,14 @@ $(document).ready(function() {
     return stelline;
   }
 
+  // funzione di output bandierine lingue supportate
   function generateFlag(lingua) {
     var listaBandiere = ["it", "en"];
 
     var lang = "";
 
     if(listaBandiere.includes(lingua)) {
-      lang = '<img src="img/' + lingua + '.svg">';
+      lang = '<img src="img/' + lingua + '.svg" class="flag">';
     } else  {
       lang = lingua.toUpperCase();
     }
@@ -134,6 +136,16 @@ $(document).ready(function() {
     return lang;
   }
 
+  // funzione output poster
+  function generatePoster(posterUrl) {
+    var poster;
+    if (posterUrl != null) {
+      poster = 'https://image.tmdb.org/t/p/w342/' + posterUrl;
+    } else {
+      poster = 'img/nondisp.png';
+    }
 
+    return poster;
+  }
 
 });
