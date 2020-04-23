@@ -7,6 +7,7 @@ $(document).ready(function() {
   var searchBtn = $("#search-btn");
   var contRisultati = $(".result-container");
 
+  // CODICE --------------------------------------------------------------------
   // al click sul bottone "CERCA"
   searchBtn.click(function() {
     // cancello tutto il contenuto delle precedenti ricerche
@@ -16,53 +17,57 @@ $(document).ready(function() {
     $("#input").val("");
     contRisultati.append('<span>Risultati della ricerca per "' + queryString + '"</span><br>');
 
-    // chiamata ajax per film
+    cercaFilm(queryString);
+    cercaSerie(queryString);
+
+  });
+
+
+  // DICHIARAZIONE FUNZIONI ----------------------------------------------------
+
+  function cercaFilm(query) {
+    var listaRisultati;
     $.ajax({
       url: "https://api.themoviedb.org/3/search/movie",
       method: "GET",
       data: {
         api_key: "db123098e9fe123d1b0a79cc401c920d",
-        query: queryString,
+        query: query,
         language: "it-IT"
       },
       success: function(data, stato) {
         // salvo l'array di oggetti
-        var listaRisultati = data.results;
-
+        listaRisultati = data.results;
         stampaRisultati(listaRisultati, "Film");
       },
       error: function(richiesta, stato, errore) {
         console.log("ERRORE! Codice: " + richiesta.status);
       }
     });
+  }
 
-    // chiamata ajax per serie tv
+  function cercaSerie(query) {
+    var listaRisultati
     $.ajax({
       url: "https://api.themoviedb.org/3/search/tv",
       method: "GET",
       data: {
         api_key: "db123098e9fe123d1b0a79cc401c920d",
-        query: queryString,
+        query: query,
         language: "it-IT"
       },
       success: function(data, stato) {
         // salvo l'array di oggetti
-        var listaRisultati = data.results;
-
+        listaRisultati = data.results;
         stampaRisultati(listaRisultati, "TV");
       },
       error: function(richiesta, stato, errore) {
         console.log("ERRORE! Codice: " + richiesta.status);
       }
     });
-  });
+  }
 
-
-  // DICHIARAZIONE FUNZIONI ----------------------------------------------------
-
-  // funzione che estre le informazioni che mi servono dagli oggetti dell'array
-  // e le stampa in pagina tramite handlebars
-  // se non ci sono risultati stampa un messaggio in pagina
+  // funzione output risultato ricerca
   function stampaRisultati(arrayOggetti, tipo) {
     var title, origTitle;
 
