@@ -14,6 +14,7 @@ $(document).ready(function() {
     // salvo il valore inserito dall'utente e svuoto l'input
     var queryString = $("#input").val();
     $("#input").val("");
+    contRisultati.append('<span>Risultati della ricerca per "' + queryString + '"</span><br>');
 
     // chiamata ajax per film
     $.ajax({
