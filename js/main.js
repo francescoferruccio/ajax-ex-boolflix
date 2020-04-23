@@ -6,7 +6,6 @@ $(document).ready(function() {
   // variabili globali
   var searchBtn = $("#search-btn");
   var contRisultati = $(".result-container");
-  var listaBandiere = ["it", "en"];
 
   // al click sul bottone "CERCA"
   searchBtn.click(function() {
@@ -82,35 +81,11 @@ $(document).ready(function() {
           origTitle = arrayOggetti[i].original_name;
         }
 
-        // trasformo il voto in un numero intero tra 1 e 5
-        var voto = arrayOggetti[i].vote_average;
-        voto = Math.ceil((voto / 2));
-
-        // creo una stringa di stelline dinamicamente in base al voto
-        var stelline = "";
-        // inserisco tante stelline piene quanto il numero del voto
-        for (var j = 0; j < voto; j++) {
-          stelline += '<i class="fas fa-star"></i>';
-        }
-        // inserisco la rimanenza di stelline vuote fino ad averne 5
-        for (var k = voto; k < 5; k++) {
-          stelline += '<i class="far fa-star"></i>';
-        }
-
-        // visualizzo una bandierina se è presente altrimenti stampo
-        // il codice della lingua
-        var lingua = arrayOggetti[i].original_language;
-        if(listaBandiere.includes(lingua)) {
-          lingua = '<img src="img/' + lingua + '.svg">';
-        } else  {
-          lingua = lingua.toUpperCase();
-        }
-
         var context = {
           titolo: title,
           titoloOriginale: origTitle,
-          lingua: lingua,
-          voto: stelline,
+          lingua: generateFlag(arrayOggetti[i].original_language),
+          voto: votoInStelline(arrayOggetti[i].vote_average),
           tipo: tipo
         };
 
@@ -124,6 +99,39 @@ $(document).ready(function() {
         }
       }
     }
+  }
+
+  // funzione di output voto in stelline
+  function votoInStelline(voto) {
+    // trasformo il voto in un numero intero tra 1 e 5
+    votoBase5 = Math.ceil((voto / 2));
+
+    // creo una stringa di stelline dinamicamente in base al voto
+    var stelline = "";
+    // inserisco tante stelline piene quanto il numero del voto
+    for (var i = 0; i < votoBase5; i++) {
+      stelline += '<i class="fas fa-star"></i>';
+    }
+    // inserisco la rimanenza di stelline vuote fino ad averne 5
+    for (var j = votoBase5; j < 5; j++) {
+      stelline += '<i class="far fa-star"></i>';
+    }
+
+    return stelline;
+  }
+
+  function generateFlag(lingua) {
+    var listaBandiere = ["it", "en"];
+
+    var lang = "";
+
+    if(listaBandiere.includes(lingua)) {
+      lang = '<img src="img/' + lingua + '.svg">';
+    } else  {
+      lang = lingua.toUpperCase();
+    }
+
+    return lang;
   }
 
 
