@@ -83,7 +83,8 @@ $(document).ready(function() {
           titoloOriginale: origTitle,
           lingua: generateFlag(arrayOggetti[i].original_language),
           voto: votoInStelline(arrayOggetti[i].vote_average),
-          tipo: tipo
+          tipo: tipo,
+          trama: generateOverview(arrayOggetti[i].overview)
         };
 
         var html = template(context);
@@ -144,4 +145,21 @@ $(document).ready(function() {
     return poster;
   }
 
+  // funzione output trama
+  function generateOverview(trama) {
+    var result;
+
+    if(trama === "") {
+      result = "Descrizione non disponibile";
+    } else {
+      result = trama;
+    }
+
+    // se la descrizione è troppo lunga la riduco a 300 caratteri
+    if(result.length > 300) {
+      result = trama.slice(0, 300) + "... (continua)";
+    }
+
+    return result;
+  }
 });
