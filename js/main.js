@@ -8,6 +8,7 @@ $(document).ready(function() {
   var contRisultati = $(".result-container");
 
   // CODICE --------------------------------------------------------------------
+
   // al click sul bottone "CERCA"
   searchBtn.click(function() {
     // cancello tutto il contenuto delle precedenti ricerche
@@ -17,41 +18,30 @@ $(document).ready(function() {
     $("#input").val("");
     contRisultati.append('<span>Risultati della ricerca per "' + queryString + '"</span><br>');
 
-    cercaFilm(queryString);
-    cercaSerie(queryString);
+    // chiamata ajax per film
+    ricerca(queryString, "Film");
+    // chiamata ajax per serie TV
+    ricerca(queryString, "TV");
 
   });
 
 
   // DICHIARAZIONE FUNZIONI ----------------------------------------------------
 
-  function cercaFilm(query) {
-    var listaRisultati;
-    $.ajax({
-      url: "https://api.themoviedb.org/3/search/movie",
-      method: "GET",
-      data: {
-        api_key: "db123098e9fe123d1b0a79cc401c920d",
-        query: query,
-        language: "it-IT"
-      },
-      success: function(data, stato) {
-        // salvo l'array di oggetti
-        listaRisultati = data.results;
-        stampaRisultati(listaRisultati, "Film");
-      },
-      error: function(richiesta, stato, errore) {
-        console.log("ERRORE! Codice: " + richiesta.status);
-      }
-    });
-  }
+  function ricerca(query, tipo) {
+    var endPoint, listaRisultati;
 
-  function cercaSerie(query) {
-    var listaRisultati
+    if(tipo === "Film") {
+      endPoint = 'https://api.themoviedb.org/3/search/movie';
+    } else if (tipo === "TV") {
+      endPoint = 'https://api.themoviedb.org/3/search/tv';
+    }
+
     $.ajax({
-      url: "https://api.themoviedb.org/3/search/tv",
+      url: endPoint,
       method: "GET",
       data: {
+        url: endPoint,
         api_key: "db123098e9fe123d1b0a79cc401c920d",
         query: query,
         language: "it-IT"
@@ -59,7 +49,7 @@ $(document).ready(function() {
       success: function(data, stato) {
         // salvo l'array di oggetti
         listaRisultati = data.results;
-        stampaRisultati(listaRisultati, "TV");
+        stampaRisultati(listaRisultati, tipo);
       },
       error: function(richiesta, stato, errore) {
         console.log("ERRORE! Codice: " + richiesta.status);
@@ -146,7 +136,7 @@ $(document).ready(function() {
   function generatePoster(posterUrl) {
     var poster;
     if (posterUrl != null) {
-      poster = 'https://image.tmdb.org/t/p/w342/' + posterUrl;
+      poster = 'https://image.tmdb.org/t/p/w342' + posterUrl;
     } else {
       poster = 'img/nondisp.png';
     }
