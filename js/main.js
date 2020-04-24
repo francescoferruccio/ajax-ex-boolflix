@@ -22,9 +22,23 @@ $(document).ready(function() {
     ricerca(queryString, "Film");
     // chiamata ajax per serie TV
     ricerca(queryString, "TV");
-
-
   });
+
+  $("#input").keydown(function(event) {
+    if (event.which == 13) {
+      // cancello tutto il contenuto delle precedenti ricerche
+      contRisultati.html("");
+      // salvo il valore inserito dall'utente e svuoto l'input
+      var queryString = $("#input").val();
+      $("#input").val("");
+      $(".recap-ricerca").text('Risultati della ricerca per "' + queryString + '".');
+
+      // chiamata ajax per film
+      ricerca(queryString, "Film");
+      // chiamata ajax per serie TV
+      ricerca(queryString, "TV");
+    }
+  })
 
 
   // DICHIARAZIONE FUNZIONI ----------------------------------------------------

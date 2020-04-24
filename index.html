@@ -32,12 +32,16 @@
         <span class="titoloNonDisp">{{titolo}}</span>
         <img class ="poster" src="{{{poster}}}" alt="poster">
         <div class="info">
-          <span>Titolo: {{titolo}}</span>
-          <span class="original-title">Titolo Originale: {{titoloOriginale}}</span>
-          <span class="language">Lingua Originale: {{{lingua}}}</span>
-          <span>Voto: {{{voto}}}</span>
-          <span>Tipo: {{tipo}}</span>
-          <span>Trama: {{trama}}</span>
+          <div class="info-top">
+            <span>Titolo: {{titolo}}</span>
+            <span class="original-title">Titolo Originale: {{titoloOriginale}}</span>
+            <span class="language">Lingua Originale: {{{lingua}}}</span>
+            <span>Voto: {{{voto}}}</span>
+            <span>Tipo: {{tipo}}</span>
+          </div>
+          <div class="info-bottom">
+            <span>Trama: {{trama}}</span>
+          </div>
         </div>
       </div>
     </script>
