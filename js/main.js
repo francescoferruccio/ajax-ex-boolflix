@@ -23,6 +23,7 @@ $(document).ready(function() {
     // chiamata ajax per serie TV
     ricerca(queryString, "TV");
 
+
   });
 
 
@@ -97,6 +98,14 @@ $(document).ready(function() {
         }
       }
     }
+
+    $(".poster").each( function() {
+      var self = $(this);
+
+      if (self.attr("src") === "img/nondisp.png") {
+        self.siblings(".titoloNonDisp").addClass("visible");
+      }
+    });
   }
 
   // funzione di output voto in stelline

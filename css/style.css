@@ -10,6 +10,7 @@ ul {
 
 body {
   background-color: grey;
+  font-family: sans-serif;
 }
 
 header {
@@ -39,11 +40,23 @@ main {
 .movie-card {
   position: relative;
   margin: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .movie-card .poster {
   height: 100%;
   width: 100%;
+}
+
+.movie-card .titoloNonDisp {
+  position: absolute;
+  display: none;
+  margin-top: 20px;
+}
+
+.movie-card .visible {
+  display: block;
 }
 
 .movie-card .language {
