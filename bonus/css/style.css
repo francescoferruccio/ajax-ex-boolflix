@@ -75,7 +75,8 @@ main {
 .movie-card .titoloNonDisp {
   position: absolute;
   display: none;
-  margin-top: 20px;
+  margin-top: 30px;
+  font-size: 28px;
 }
 
 .movie-card .visible {

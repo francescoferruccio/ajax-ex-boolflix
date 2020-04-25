@@ -24,10 +24,6 @@ $(document).ready(function() {
     ricerca(queryString, "TV");
   });
 
-  $(".result-container").on("click", ".movie-card", function() {
-    $(this).find(".modale").toggle();
-  });
-
   // alla pressione del tasto INVIO eseguo la ricerca
   $("#input").keydown(function(event) {
     if (event.which == 13) {
@@ -44,6 +40,11 @@ $(document).ready(function() {
       ricerca(queryString, "TV");
     }
   })
+
+  // al click su una qualsiasi card apro la rispettiva modale
+  $(".result-container").on("click", ".movie-card", function() {
+    $(this).find(".modale").toggle();
+  });
 
 
   // DICHIARAZIONE FUNZIONI ----------------------------------------------------
@@ -82,7 +83,7 @@ $(document).ready(function() {
 
   // funzione output risultato ricerca
   function stampaRisultati(arrayOggetti, tipo) {
-    var title, origTitle;
+    var title, origTitle, release;
 
     if(arrayOggetti.length == 0) {
       if(tipo == "Film") {
@@ -95,9 +96,11 @@ $(document).ready(function() {
         if (tipo == "Film") {
           title = arrayOggetti[i].title;
           origTitle = arrayOggetti[i].original_title;
+          release = arrayOggetti[i].release_date;
         } else {
           title = arrayOggetti[i].name;
           origTitle = arrayOggetti[i].original_name;
+          release = arrayOggetti[i].first_air_date;
         }
 
         var context = {
@@ -106,6 +109,7 @@ $(document).ready(function() {
           titoloOriginale: origTitle,
           lingua: generateFlag(arrayOggetti[i].original_language),
           voto: votoInStelline(arrayOggetti[i].vote_average),
+          anno: generateAnno(release),
           tipo: tipo,
           trama: generateOverview(arrayOggetti[i].overview, "riassunto"),
           tramaCompleta: generateOverview(arrayOggetti[i].overview, "completa"),
@@ -206,5 +210,11 @@ $(document).ready(function() {
     }
 
     return result;
+  }
+
+  function generateAnno(data) {
+    var anno = data.slice(0, 4);
+
+    return anno;
   }
 });
