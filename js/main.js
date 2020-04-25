@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   // CODICE --------------------------------------------------------------------
 
-  // al click sul bottone "CERCA"
+  // al click sul bottone "CERCA" eseguo la ricerca
   searchBtn.click(function() {
     // cancello tutto il contenuto delle precedenti ricerche
     contRisultati.html("");
@@ -24,6 +24,7 @@ $(document).ready(function() {
     ricerca(queryString, "TV");
   });
 
+  // alla pressione del tasto INVIO eseguo la ricerca
   $("#input").keydown(function(event) {
     if (event.which == 13) {
       // cancello tutto il contenuto delle precedenti ricerche
@@ -43,9 +44,12 @@ $(document).ready(function() {
 
   // DICHIARAZIONE FUNZIONI ----------------------------------------------------
 
+  // funzione di ricerca che effettua la chiamata ajax e stampa i risultati
+  // in pagina
   function ricerca(query, tipo) {
     var endPoint, listaRisultati;
 
+    // cambio l'endpoint della chiamata in base al tipo ricercato
     if(tipo === "Film") {
       endPoint = 'https://api.themoviedb.org/3/search/movie';
     } else if (tipo === "TV") {

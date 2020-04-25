@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>BoolFlix</title>
+    <script src="https://kit.fontawesome.com/567ebbfc9c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+
+    <header>
+      <div class="logo">
+        <h1>BOOLFLIX</h1>
+      </div>
+      <div class="searchbar">
+        <input id="input" type="text" name="input" value="">
+        <button id="search-btn" type="button" name="button">CERCA</button>
+      </div>
+    </header>
+
+    <main>
+      <span class="recap-ricerca"></span>
+      <div class="result-container">
+
+      </div>
+    </main>
+
+
+    <!-- TEMPLATE -->
+    <script id="movie-template" type="text/x-handlebars-template">
+      <div class="movie-card">
+        <span class="titoloNonDisp">{{titolo}}</span>
+        <img class ="poster" src="{{{poster}}}" alt="poster">
+        <div class="info">
+          <div class="info-top">
+            <span>Titolo: {{titolo}}</span>
+            <span class="original-title">Titolo Originale: {{titoloOriginale}}</span>
+            <span class="language">Lingua Originale: {{{lingua}}}</span>
+            <span>Voto: {{{voto}}}</span>
+            <span>Tipo: {{tipo}}</span>
+          </div>
+          <div class="info-bottom">
+            <p>Trama: {{trama}}</p>
+          </div>
+        </div>
+
+        <div class="modale">
+          <div class="modal-content">
+            <div class="modal-background">
+              {{{backdrop}}}
+            </div>
+            <div class="layover">
+              <div class="modal-top">
+                <span>Titolo: {{titolo}}</span>
+                <span class="original-title">Titolo Originale: {{titoloOriginale}}</span>
+                <span class="language">Lingua Originale: {{{lingua}}}</span>
+                <span>Voto: {{{voto}}}</span>
+              </div>
+              <div class="modal-bottom">
+                <p>Trama: {{tramaCompleta}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -126,3 +126,68 @@ main {
 .fa-star {
   color: #FFD700;
 }
+
+/* modale */
+.modale {
+  display: none;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  height: 100vh;
+  width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+  color: #fff;
+}
+
+.modale .modal-content {
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 20px;
+  right: 30px;
+  height: calc(100% - 40px);
+  width: calc(100% - 50px);
+  background-color: #fff;
+  z-index: -1;
+}
+
+.modale .modal-content .modal-background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.modale .modal-content .modal-background img {
+  margin: auto;
+  width: 100%;
+  height: auto;
+}
+
+.modale .modal-content .layover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+}
+
+.modal-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 30%;
+  width: 60%;
+}
+
+.modal-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 70%;
+  width: 60%;
+}
