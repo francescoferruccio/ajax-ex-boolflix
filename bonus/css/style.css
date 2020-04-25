@@ -191,13 +191,18 @@ main {
 .modal-bottom {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+
   height: 70%;
   width: 100%;
 }
 
 .modal-bottom .trama {
-  width: 70%;
+  padding-top: 10px;
+  display: flex;
+  width: 100%;
+  padding-right: 30%;
+  overflow-y: auto;
 }
 
 /* sezione credits */
@@ -210,7 +215,7 @@ main {
 .staff-card {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding-right: 10px;
   width: 200px;
 }
 
