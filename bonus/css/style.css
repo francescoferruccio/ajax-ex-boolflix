@@ -190,5 +190,37 @@ main {
   flex-direction: column;
   justify-content: space-around;
   height: 70%;
-  width: 60%;
+  width: 100%;
+}
+
+.modal-bottom .trama {
+  width: 70%;
+}
+
+.credits {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.staff-card {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 200px;
+}
+
+.staff-img {
+  width: 100%;
+  margin-bottom: 10px;
+  height: auto;
+}
+
+.staff-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.staff-info span {
+  margin-bottom: 5px;
 }

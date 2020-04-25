@@ -1,8 +1,10 @@
 $(document).ready(function() {
   // handlebars
-  var source = $("#movie-template").html();
-  var template = Handlebars.compile(source);
+  var movieSource = $("#movie-template").html();
+  var movieTemplate = Handlebars.compile(movieSource);
 
+  var staffSource = $("#staff-template").html();
+  var staffTemplate = Handlebars.compile(staffSource);
   // variabili globali
   var searchBtn = $("#search-btn");
   var contRisultati = $(".result-container");
@@ -43,7 +45,13 @@ $(document).ready(function() {
 
   // al click su una qualsiasi card apro la rispettiva modale
   $(".result-container").on("click", ".movie-card", function() {
+    var id=$(this).data("id");
     $(this).find(".modale").toggle();
+
+    var type = $(this).data("type");
+
+    // cerco attori e regista del film cliccato
+    cercaStaff(id, type);
   });
 
 
@@ -65,7 +73,6 @@ $(document).ready(function() {
       url: endPoint,
       method: "GET",
       data: {
-        url: endPoint,
         api_key: "db123098e9fe123d1b0a79cc401c920d",
         query: query,
         language: "it-IT"
@@ -83,7 +90,7 @@ $(document).ready(function() {
 
   // funzione output risultato ricerca
   function stampaRisultati(arrayOggetti, tipo) {
-    var title, origTitle, release;
+    var title, origTitle, release, type;
 
     if(arrayOggetti.length == 0) {
       if(tipo == "Film") {
@@ -97,13 +104,17 @@ $(document).ready(function() {
           title = arrayOggetti[i].title;
           origTitle = arrayOggetti[i].original_title;
           release = arrayOggetti[i].release_date;
+          type = "movie";
         } else {
           title = arrayOggetti[i].name;
           origTitle = arrayOggetti[i].original_name;
           release = arrayOggetti[i].first_air_date;
+          type = "tv";
         }
 
         var context = {
+          id: arrayOggetti[i].id,
+          type: type,
           poster: generatePoster(arrayOggetti[i].poster_path),
           titolo: title,
           titoloOriginale: origTitle,
@@ -116,7 +127,7 @@ $(document).ready(function() {
           backdrop: genrateBackdrop(arrayOggetti[i].backdrop_path)
         };
 
-        var html = template(context);
+        var html = movieTemplate(context);
         contRisultati.append(html);
 
         // controllo se il titolo è uguale al titolo originale nascondo
@@ -212,9 +223,58 @@ $(document).ready(function() {
     return result;
   }
 
-  function generateAnno(data) {
-    var anno = data.slice(0, 4);
+  function generateAnno(releaseDate) {
+    var anno;
+
+    if (releaseDate == undefined) {
+      anno = "Dato non disponibile";
+    } else {
+      anno = releaseDate.slice(0, 4);
+    }
 
     return anno;
+  }
+
+  function cercaStaff(movieID, tipo) {
+    $(".credits").html("");
+
+    $.ajax({
+      url: 'https://api.themoviedb.org/3/' + tipo + '/' + movieID + '/credits',
+      data: {
+        api_key: "db123098e9fe123d1b0a79cc401c920d",
+      },
+      method: "GET",
+      success: function (data, stato) {
+        var movie = data.cast;
+
+        for(var i = 0; i < movie.length; i++) {
+          var personaggio = movie[i].character;
+          var foto = movie[i].profile_path;
+
+          if(personaggio === "") {
+            personaggio = "non disponibile"
+          }
+
+          if(foto === null) {
+            foto = 'img/attore.jpg';
+          } else {
+            foto = 'https://image.tmdb.org/t/p/w185' + movie[i].profile_path;
+          }
+
+          var context = {
+            staffImg: foto,
+            staffName: movie[i].name,
+            staffCharacter: personaggio
+          };
+          var html = staffTemplate(context);
+
+          $(".credits").append(html);
+        }
+      },
+      error: function (richiesta, stato, errore) {
+        console.log("ERRORE", richiesta, stato, errore);
+      }
+    }
+    );
   }
 });

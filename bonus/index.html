@@ -27,8 +27,9 @@
 
 
     <!-- TEMPLATE -->
+    <!-- movie template -->
     <script id="movie-template" type="text/x-handlebars-template">
-      <div class="movie-card">
+      <div class="movie-card" data-id="{{id}}" data-type="{{type}}">
         <span class="titoloNonDisp">{{titolo}}</span>
         <img class ="poster" src="{{{poster}}}" alt="poster">
         <div class="info">
@@ -59,10 +60,27 @@
                 <span>Voto: {{{voto}}}</span>
               </div>
               <div class="modal-bottom">
-                <p>Trama: {{tramaCompleta}}</p>
+                <p class="trama">Trama: {{tramaCompleta}}</p>
+                <div class="credits">
+
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </script>
+
+    <!-- staff template -->
+    <script id="staff-template" type="text/x-handlebars-template">
+      <div class="staff-card">
+        <div class="staff-img">
+          <img src="{{staffImg}}">
+        </div>
+        <div class="staff-info">
+          <span>{{{staffName}}}</span>
+          <span>nel ruolo di</span>
+          <span>{{{staffCharacter}}}</span>
         </div>
       </div>
     </script>
