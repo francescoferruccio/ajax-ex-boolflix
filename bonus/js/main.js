@@ -211,6 +211,7 @@ $(document).ready(function() {
     return result;
   }
 
+  // funzione output sfondo modale
   function genrateBackdrop(sfondo) {
     var result;
 
@@ -223,6 +224,7 @@ $(document).ready(function() {
     return result;
   }
 
+  // funzione output anno
   function generateAnno(releaseDate) {
     var anno;
 
@@ -235,6 +237,7 @@ $(document).ready(function() {
     return anno;
   }
 
+  // funzione output attori
   function cercaStaff(movieID, tipo) {
     $(".credits").html("");
 

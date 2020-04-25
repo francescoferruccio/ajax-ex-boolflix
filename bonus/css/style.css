@@ -54,12 +54,15 @@ main {
   color: #fff;
 }
 
+/* container risultati principale */
 .result-container {
   padding: 20px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
+/* card film */
 .movie-card {
   position: relative;
   margin: 10px;
@@ -197,6 +200,7 @@ main {
   width: 70%;
 }
 
+/* sezione credits */
 .credits {
   display: flex;
   overflow-x: auto;
