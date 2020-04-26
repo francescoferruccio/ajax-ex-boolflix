@@ -45,13 +45,21 @@ header {
 /* REGOLE MAIN ****************************************************************/
 main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.recap-ricerca {
-  margin-top: 10px;
+.top-result {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
   color: #fff;
+}
+
+.top-result.visible {
+  display: flex;
 }
 
 /* container risultati principale */
@@ -68,6 +76,10 @@ main {
   margin: 10px;
   display: flex;
   justify-content: center;
+}
+
+.movie-card:hover {
+  cursor: pointer;
 }
 
 .movie-card .poster {

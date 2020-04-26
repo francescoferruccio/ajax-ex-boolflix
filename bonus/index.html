@@ -19,7 +19,14 @@
     </header>
 
     <main>
-      <span class="recap-ricerca"></span>
+      <div class="top-result">
+        <span class="recap-ricerca"></span>
+        <div class="filter">
+          <span>Filtra per categoria: </span>
+          <select id="genre-select" name="genre-select"></select>
+        </div>
+      </div>
+
       <div class="result-container">
 
       </div>
@@ -29,7 +36,7 @@
     <!-- TEMPLATE -->
     <!-- movie template -->
     <script id="movie-template" type="text/x-handlebars-template">
-      <div class="movie-card" data-id="{{id}}" data-type="{{type}}">
+      <div class="movie-card" data-id="{{id}}" data-type="{{type}}" data-genere="{{genre}}">
         <span class="titoloNonDisp">{{titolo}}</span>
         <img class ="poster" src="{{{poster}}}" alt="poster">
         <div class="info">
@@ -85,6 +92,11 @@
           <span>{{{staffCharacter}}}</span>
         </div>
       </div>
+    </script>
+
+    <!-- select template -->
+    <script id="select-template" type="text/x-handlebars-template">
+      <option class="filter-option" value="{{idGenre}}">{{nameGenre}}</option>
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>

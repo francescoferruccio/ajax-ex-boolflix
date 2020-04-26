@@ -5,9 +5,13 @@ $(document).ready(function() {
 
   var staffSource = $("#staff-template").html();
   var staffTemplate = Handlebars.compile(staffSource);
+
+  var selectSource = $("#select-template").html();
+  var selectTemplate = Handlebars.compile(selectSource);
   // variabili globali
   var searchBtn = $("#search-btn");
   var contRisultati = $(".result-container");
+  // var listaGeneriMovie, listaGeneriTv;
 
   // CODICE --------------------------------------------------------------------
 
@@ -54,6 +58,19 @@ $(document).ready(function() {
     cercaStaff(id, type);
   });
 
+  $("#genre-select").change(function() {
+    var filtro = $(this).val();
+    $(".movie-card").each(function() {
+      var thisGeneri = "" + $(this).data("genere");
+      var arrayGeneri = thisGeneri.split(",");
+      if(arrayGeneri.includes(filtro)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    }
+  )
+  });
 
   // DICHIARAZIONE FUNZIONI ----------------------------------------------------
 
@@ -80,6 +97,7 @@ $(document).ready(function() {
       success: function(data, stato) {
         // salvo l'array di oggetti
         listaRisultati = data.results;
+        getGenreList(listaRisultati, tipo);
         stampaRisultati(listaRisultati, tipo);
       },
       error: function(richiesta, stato, errore) {
@@ -115,6 +133,7 @@ $(document).ready(function() {
         var context = {
           id: arrayOggetti[i].id,
           type: type,
+          genre: arrayOggetti[i].genre_ids,
           poster: generatePoster(arrayOggetti[i].poster_path),
           titolo: title,
           titoloOriginale: origTitle,
@@ -126,6 +145,8 @@ $(document).ready(function() {
           tramaCompleta: generateOverview(arrayOggetti[i].overview, "completa"),
           backdrop: genrateBackdrop(arrayOggetti[i].backdrop_path)
         };
+
+        $(".top-result").addClass("visible");
 
         var html = movieTemplate(context);
         contRisultati.append(html);
@@ -279,5 +300,47 @@ $(document).ready(function() {
       }
     }
     );
+  }
+
+  // funzione che richiede la lista dei generi all'api
+  function getGenreList(listaFilm, tipo) {
+    var endPoint;
+
+    if(tipo === "Film") {
+      endPoint = "https://api.themoviedb.org/3/genre/movie/list";
+    } else if (tipo === "TV") {
+      endPoint = "https://api.themoviedb.org/3/genre/tv/list";
+    }
+
+    $.ajax({
+      url: endPoint,
+      data: {
+        api_key: "db123098e9fe123d1b0a79cc401c920d",
+        language: "it-IT"
+      },
+      method: "GET",
+      success: function(data, stato) {
+        var listGenre = data.genres;
+
+        createSelect(listGenre);
+      },
+      error: function(richiesta, stato, errore) {
+        console.log("ERRORE");
+      }
+    });
+  }
+
+  // funzione che inserisce la lista dei generi restituita dall'api nella select
+  function createSelect(generi) {
+    for(var i=0; i < generi.length; i++) {
+      var context = {
+        idGenre: generi[i].id,
+        nameGenre: generi[i].name
+      };
+
+      var html = selectTemplate(context);
+
+      $("#genre-select").append(html);
+    }
   }
 });
