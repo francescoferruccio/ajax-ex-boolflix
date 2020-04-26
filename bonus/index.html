@@ -23,7 +23,9 @@
         <span class="recap-ricerca"></span>
         <div class="filter">
           <span>Filtra per categoria: </span>
-          <select id="genre-select" name="genre-select"></select>
+          <select id="genre-select" name="genre-select">
+            <option value="all">Tutti</option>
+          </select>
         </div>
       </div>
 
@@ -36,7 +38,7 @@
     <!-- TEMPLATE -->
     <!-- movie template -->
     <script id="movie-template" type="text/x-handlebars-template">
-      <div class="movie-card" data-id="{{id}}" data-type="{{type}}" data-genere="{{genre}}">
+      <div class="movie-card" data-id="{{id}}" data-type="{{type}}" data-genere="all,{{genre}}">
         <span class="titoloNonDisp">{{titolo}}</span>
         <img class ="poster" src="{{{poster}}}" alt="poster">
         <div class="info">

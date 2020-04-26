@@ -11,7 +11,6 @@ $(document).ready(function() {
   // variabili globali
   var searchBtn = $("#search-btn");
   var contRisultati = $(".result-container");
-  // var listaGeneriMovie, listaGeneriTv;
 
   // CODICE --------------------------------------------------------------------
 
@@ -58,6 +57,7 @@ $(document).ready(function() {
     cercaStaff(id, type);
   });
 
+  // funzione filtro tramite select
   $("#genre-select").change(function() {
     var filtro = $(this).val();
     $(".movie-card").each(function() {
@@ -97,7 +97,7 @@ $(document).ready(function() {
       success: function(data, stato) {
         // salvo l'array di oggetti
         listaRisultati = data.results;
-        getGenreList(listaRisultati, tipo);
+        getGenreList(tipo);
         stampaRisultati(listaRisultati, tipo);
       },
       error: function(richiesta, stato, errore) {
@@ -303,7 +303,7 @@ $(document).ready(function() {
   }
 
   // funzione che richiede la lista dei generi all'api
-  function getGenreList(listaFilm, tipo) {
+  function getGenreList(tipo) {
     var endPoint;
 
     if(tipo === "Film") {
@@ -320,7 +320,10 @@ $(document).ready(function() {
       },
       method: "GET",
       success: function(data, stato) {
-        var listGenre = data.genres;
+        var listGenre = [];
+        for (var i = 0; i < data.genres.length; i++) {
+          listGenre.push(data.genres[i]);
+        };
 
         createSelect(listGenre);
       },
@@ -332,6 +335,7 @@ $(document).ready(function() {
 
   // funzione che inserisce la lista dei generi restituita dall'api nella select
   function createSelect(generi) {
+
     for(var i=0; i < generi.length; i++) {
       var context = {
         idGenre: generi[i].id,
