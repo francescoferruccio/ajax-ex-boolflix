@@ -271,7 +271,8 @@ $(document).ready(function() {
       success: function (data, stato) {
         var movie = data.cast;
 
-        for(var i = 0; i < movie.length; i++) {
+        // salvo i primi 9 risultati
+        for(var i = 0; i < 9; i++) {
           var personaggio = movie[i].character;
           var foto = movie[i].profile_path;
 
