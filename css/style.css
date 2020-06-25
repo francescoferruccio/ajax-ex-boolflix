@@ -45,26 +45,41 @@ header {
 /* REGOLE MAIN ****************************************************************/
 main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.recap-ricerca {
-  margin-top: 10px;
+.top-result {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
   color: #fff;
 }
 
+.top-result.visible {
+  display: flex;
+}
+
+/* container risultati principale */
 .result-container {
   padding: 20px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
+/* card film */
 .movie-card {
   position: relative;
   margin: 10px;
   display: flex;
   justify-content: center;
+}
+
+.movie-card:hover {
+  cursor: pointer;
 }
 
 .movie-card .poster {
@@ -75,7 +90,8 @@ main {
 .movie-card .titoloNonDisp {
   position: absolute;
   display: none;
-  margin-top: 20px;
+  margin-top: 30px;
+  font-size: 28px;
 }
 
 .movie-card .visible {
@@ -125,4 +141,107 @@ main {
 
 .fa-star {
   color: #FFD700;
+}
+
+/* modale */
+.modale {
+  display: none;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  height: 100vh;
+  width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+  color: #fff;
+}
+
+.modale .modal-content {
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 20px;
+  right: 30px;
+  height: calc(100% - 40px);
+  width: calc(100% - 50px);
+  background-color: #fff;
+  z-index: -1;
+}
+
+.modale .modal-content .modal-background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.modale .modal-content .modal-background img {
+  margin: auto;
+  width: 100%;
+  height: auto;
+}
+
+.modale .modal-content .layover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+}
+
+.modal-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 30%;
+  width: 60%;
+}
+
+.modal-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 70%;
+  width: 100%;
+}
+
+.modal-bottom .trama {
+  padding-top: 10px;
+  display: flex;
+  width: 100%;
+  padding-right: 30%;
+  overflow-y: auto;
+}
+
+/* sezione credits */
+.credits {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.staff-card {
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+  width: 200px;
+}
+
+.staff-img {
+  width: 100%;
+  margin-bottom: 10px;
+  height: auto;
+}
+
+.staff-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.staff-info span {
+  margin-bottom: 5px;
 }

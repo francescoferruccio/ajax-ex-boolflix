@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>BoolFlix</title>
+    <title>BoolFlix BONUS</title>
     <script src="https://kit.fontawesome.com/567ebbfc9c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
   </head>
@@ -19,7 +19,16 @@
     </header>
 
     <main>
-      <span class="recap-ricerca"></span>
+      <div class="top-result">
+        <span class="recap-ricerca"></span>
+        <div class="filter">
+          <span>Filtra per categoria: </span>
+          <select id="genre-select" name="genre-select">
+            <option value="all">Tutti</option>
+          </select>
+        </div>
+      </div>
+
       <div class="result-container">
 
       </div>
@@ -27,8 +36,9 @@
 
 
     <!-- TEMPLATE -->
+    <!-- movie template -->
     <script id="movie-template" type="text/x-handlebars-template">
-      <div class="movie-card">
+      <div class="movie-card" data-id="{{id}}" data-type="{{type}}" data-genere="all,{{genre}}">
         <span class="titoloNonDisp">{{titolo}}</span>
         <img class ="poster" src="{{{poster}}}" alt="poster">
         <div class="info">
@@ -37,13 +47,58 @@
             <span class="original-title">Titolo Originale: {{titoloOriginale}}</span>
             <span class="language">Lingua Originale: {{{lingua}}}</span>
             <span>Voto: {{{voto}}}</span>
+            <span>Anno: {{{anno}}}</span>
             <span>Tipo: {{tipo}}</span>
           </div>
           <div class="info-bottom">
-            <span>Trama: {{trama}}</span>
+            <p>Trama: {{trama}}</p>
+          </div>
+        </div>
+
+        <div class="modale">
+          <div class="modal-content">
+            <div class="modal-background">
+              {{{backdrop}}}
+            </div>
+            <div class="layover">
+              <div class="modal-top">
+                <span>Titolo: {{titolo}}</span>
+                <span class="original-title">Titolo Originale: {{titoloOriginale}}</span>
+                <span class="language">Lingua Originale: {{{lingua}}}</span>
+                <span>Anno: {{{anno}}}</span>
+                <span>Voto: {{{voto}}}</span>
+              </div>
+              <div class="modal-bottom">
+                <div class="trama">
+                  <p>{{tramaCompleta}}</p>
+                </div>
+                <div class="credits">
+
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </script>
+
+    <!-- staff template -->
+    <script id="staff-template" type="text/x-handlebars-template">
+      <div class="staff-card">
+        <div class="staff-img">
+          <img src="{{staffImg}}">
+        </div>
+        <div class="staff-info">
+          <span>{{{staffName}}}</span>
+          <span>nel ruolo di</span>
+          <span>{{{staffCharacter}}}</span>
+        </div>
+      </div>
+    </script>
+
+    <!-- select template -->
+    <script id="select-template" type="text/x-handlebars-template">
+      <option class="filter-option" value="{{idGenre}}">{{nameGenre}}</option>
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>

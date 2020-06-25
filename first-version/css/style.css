@@ -1,0 +1,128 @@
+/* REGOLE GENERALI ************************************************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: grey;
+  font-family: sans-serif;
+}
+
+/* REGOLE HEADER **************************************************************/
+header {
+  background-color: #000;
+  height: 80px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: red;
+}
+
+#input {
+  height: 30px;
+}
+
+#search-btn {
+  background-color: #fff;
+  border: none;
+  height: 30px;
+  width: 50px;
+}
+
+#search-btn:hover {
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+/* REGOLE MAIN ****************************************************************/
+main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.recap-ricerca {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.result-container {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.movie-card {
+  position: relative;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.movie-card .poster {
+  height: 100%;
+  width: 100%;
+}
+
+.movie-card .titoloNonDisp {
+  position: absolute;
+  display: none;
+  margin-top: 20px;
+}
+
+.movie-card .visible {
+  display: block;
+}
+
+.movie-card .language {
+  display: flex;
+}
+
+.movie-card .flag {
+  height: 20px;
+  margin-left: 5px;
+}
+
+.movie-card .info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  padding: 10px;
+}
+
+.movie-card:hover .info {
+  opacity: 1;
+}
+
+.movie-card .info .info-top {
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.movie-card .info .info-bottom {
+  height: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.fa-star {
+  color: #FFD700;
+}
